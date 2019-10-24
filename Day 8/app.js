@@ -5,4 +5,11 @@ for(let i=0; i<40 || i % 2 === 1; i++){
     }
 }
 
-console.log(sum)
+console.log(`${sum} is`);
+
+
+function greet(fname, lname, greeting){
+    return `${greeting}, ${fname} ${lname}. Great to have you here.`;
+}
+
+console.log(greet("rithvik", "randhir","yo"));
