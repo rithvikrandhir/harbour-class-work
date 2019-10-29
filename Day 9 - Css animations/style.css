@@ -1,0 +1,91 @@
+body{
+    padding:0;
+    margin: 0;
+}
+
+.box{
+    height: 100vw;
+    background-color: indianred;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 2rem;
+}
+
+.box:hover{
+    animation: red-to-lgbt 5s ease-in-out;
+}
+
+@keyframes red-to-lgbt {
+	0% {
+		background-color: #FF0018;
+	}
+
+	2% {
+		background-color: (255, 0, 30);
+	}
+
+	4% {
+		background-color: (255, 0, 100);
+	}
+
+	10% {
+		background-color: #FFA52C;
+	}
+
+	14% {
+		background-color: (255, 165, 75) ;
+	}
+
+	22% {
+		background-color: (255, 165, 150);
+	}
+
+	32% {
+		background-color: #FFFF41;
+	}
+
+	42% {
+		background-color: (255, 255, 105);
+	}
+
+	50% {
+		background-color: (255, 255, 185);
+	}
+
+	58% {
+		background-color: #008018;
+	}
+
+	68% {
+		background-color: (0, 128, 75);
+	}
+
+	78% {
+		background-color: (0, 128, 150);
+	}
+
+	86% {
+		background-color: #0000F9;
+	}
+
+	90% {
+		background-color: (0, 100, 249);
+	}
+
+	96% {
+		background-color: #86007D;
+	}
+
+	98% {
+		background-color:  (134, 0, 200);
+	}
+
+	100% {
+		background-color :  (134, 0, 230);
+	}
+
+}
+

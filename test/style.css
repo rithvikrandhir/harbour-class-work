@@ -1,0 +1,66 @@
+.scene {
+  border: 1px solid black;
+  -webkit-perspective: 600px;
+          perspective: 600px;
+}
+
+.side {
+  background-color: brown;
+  height: 50px;
+  border: 1px solid white;
+}
+
+.side:nth-of-type(1) {
+  -webkit-transform: rotateY(1turn);
+          transform: rotateY(1turn);
+}
+
+.side:nth-of-type(2) {
+  -webkit-transform: rotateY(0deg) translateZ(60px);
+          transform: rotateY(0deg) translateZ(60px);
+}
+
+.side:nth-of-type(3) {
+  -webkit-transform: rotateY(60deg) translateZ(60px);
+          transform: rotateY(60deg) translateZ(60px);
+}
+
+.side:nth-of-type(4) {
+  -webkit-transform: rotateY(45deg);
+          transform: rotateY(45deg);
+}
+
+.side:nth-of-type(5) {
+  -webkit-transform: rotateY(45deg);
+          transform: rotateY(45deg);
+}
+
+.side:nth-of-type(6) {
+  -webkit-transform: rotateY(45deg);
+          transform: rotateY(45deg);
+}
+
+.side:nth-of-type(7) {
+  -webkit-transform: rotateY(45deg);
+          transform: rotateY(45deg);
+}
+
+.side:nth-of-type(8) {
+  -webkit-transform: rotateY(45deg);
+          transform: rotateY(45deg);
+}
+
+.side:nth-of-type(9) {
+  -webkit-transform: rotateY(-45deg);
+          transform: rotateY(-45deg);
+}
+
+.shape {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[12];
+      grid-template-columns: repeat(12, 1fr);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+/*# sourceMappingURL=style.css.map */
