@@ -7,17 +7,75 @@ body{
 .parent{
     width: 100vw;
     height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+.spacer{
+    width: 100%;
+    height: 75vh;
+    position: relative;
 }
 .content{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 10;
 }
-.backgroundImage{
+.backgroundImage1{
     width: 100%;
-    height: 100%;
+    height: 200%;
     background-image: url('./assets/3.jpg');
     background-position: center;
     background-size: cover;
+    position: relative;
+    top: -150%;
+}
+.backgroundImage2{
+    width: 100%;
+    height: 200%;
+    background-image: url('./assets/2.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    top: -150%;
+}
+.backgroundImage3{
+    width: 100%;
+    height: 200%;
+    background-image: url('./assets/1.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    top: -150%;
+}
+.backgroundImage4{
+    width: 100%;
+    height: 200%;
+    background-image: url('./assets/3.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    top: -150%;
+}
+
+#parallax2 h1::after{
+    text-decoration: underline;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

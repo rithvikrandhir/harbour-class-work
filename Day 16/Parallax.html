@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,73 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+   
 </head>
+
 <body>
-    <section class="parent">
+    <section class="parent" id="parallax1">
         <div class="content">
-                <h1>Title</h1>
+            <h1>Title 1</h1>
         </div>
-        <div class="backgroundImage"></div>
+        <div class="backgroundImage1"></div>
     </section>
+    <div class="spacer"></div>
+    <section class="parent" id="parallax2">
+        <div class="content">
+            <h1>Title 2</h1>
+        </div>
+        <div class="backgroundImage2"></div>
+    </section>
+    <div class="spacer"></div>
+    <section class="parent" id="parallax3">
+        <div class="content">
+            <h1>Title 3</h1>
+        </div>
+        <div class="backgroundImage3"></div>
+    </section>
+    <div class="spacer"></div>
+    <section class="parent" id="parallax4">
+        <div class="content">
+            <h1>Title 4</h1>
+        </div>
+        <div class="backgroundImage4"></div>
+    </section>
+    <!-- <div class="spacer"></div> -->
+    <script>
+            const controller = new ScrollMagic.Controller({globalSceneOptions : {triggerHook: "onEnter", duration:"200%"}});
+            const scene1 = new ScrollMagic.Scene({ triggerElement: "#parallax1", duration: '100%' });
+            scene1.setTween("#parallax1 > .backgroundImage1", { y: '80%'  });
+            // scene1.addIndicators();
+            scene1.addTo(controller);
+            const scene2 = new ScrollMagic.Scene({ triggerElement: "#parallax2", duration: '100%' });
+            scene2.setTween("#parallax2 > .backgroundImage2", { y: '80%' , opacity:0.1 });
+            // scene2.addIndicators();
+            scene2.addTo(controller);
+            const scene3 = new ScrollMagic.Scene({ triggerElement: "#parallax3", duration: '100%' });
+            scene3.setTween("#parallax3 > .backgroundImage3", { y: '80%' , opacity:0.4  });
+            // scene3.addIndicators();
+            scene3.addTo(controller);
+            const scene4 = new ScrollMagic.Scene({ triggerElement: "#parallax4", duration: '100%' });
+            scene4.setTween("#parallax4 > .backgroundImage4", { y: '80%'  });
+            // scene4.addIndicators();
+            scene4.addTo(controller);
+
+            const tl = new TimelineMax();
+            tl.fromTo("#parallax2 h1", 1, {x: "-50vw"}, {x: "0vw"});
+            tl.to("#parallax2 h1", 1, {scale: 2});
+            tl.fromTo("#parallax2 h1", 1, {textDecoration: 'none'}, {textDecoration: 'underline', delay: 1});
+            
+            // const controller2 = new ScrollMagic.Controller();
+            // const textScene = new ScrollMagic.Scene({triggerElement: "#parallax2", offset: '50%', duration: '100%'});
+            // textScene.setTween("#parallax2 h1", {x: '100vw'});
+            // textScene.addIndicators();
+            // textScene.addTo(controller2);
+            const controller2 = new ScrollMagic.Controller();
+            const textScene = new ScrollMagic.Scene({triggerElement: "#parallax2", duration: '100%'});
+            textScene.setTween(tl);
+            textScene.addIndicators();
+            textScene.addTo(controller2);
+    </script>
 </body>
+
 </html>
