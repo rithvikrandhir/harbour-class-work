@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+    <style>
+        body,
+        canvas {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas></canvas>
+    <script>
+
+        const canvas = document.querySelector("canvas");
+        const context = canvas.getContext("2d");
+        const time = {
+            start: performance.now(),
+            elapsed: null,
+        };
+        const mousePosition = {
+            x: 0,
+            y: 0
+        };
+        let isMouseDown = false;
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function onMouseMove(event) {
+            mousePosition.x = event.clientX;
+            mousePosition.y = event.clientY;
+        }
+
+        function onMouseDown() {
+            isMouseDown = true;
+        }
+
+        function onMouseUp() {
+            isMouseDown = false;
+        }
+
+        function draw(now) {
+            resize();
+            let particle = new Particle(mousePosition.x, mousePosition.y);
+            if (isMouseDown) {
+                particles.push(particle);
+                // console.log(particles);
+            }
+            particles = particles.filter((particle) => {
+                return particle.age < particle.lifespan
+            })
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].draw();
+                particles[i].age++;
+                //console.log(particles[i].age);
+            }
+            time.elapsed = now - time.start;
+            window.requestAnimationFrame(draw);
+        }
+
+        function Particle(x, y) {
+            this.x = x;
+            this.y = y;
+            this.lifespan = Math.round(Math.random() * 100);
+            this.age = 0;
+            this.draw = function () {
+                // let ageNow = this.age/this.lifespan;
+                context.beginPath();
+                context.fillStyle = `hsl(${180 - (20 * this.age/this.lifespan)}, 100%, 50%)`;
+                //console.log(context.fillStyle);
+                context.arc(x, y, 100 - this.age, 0, 360 * (Math.PI / 180));        
+                context.closePath();
+                context.fill();
+            }
+        }
+
+        // Particle.prototype.draw = function() {
+
+        // }
+
+        window.addEventListener("mousemove", onMouseMove);
+        window.addEventListener("mouseup", onMouseUp);
+        window.addEventListener("mousedown", onMouseDown);
+        window.requestAnimationFrame(draw);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title>My first three.js app</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        scene.add(directionalLight);
+
+        var geometry = new THREE.BoxGeometry(1, -2, 1);
+        var material = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        const sphereGeometry = new THREE.SphereGeometry(1, 20, 20);
+        const blueMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff, wireframe: true });
+        const sphere = new THREE.Mesh(sphereGeometry, blueMaterial);
+        scene.add(sphere);
+        sphere.position.y = -2.5;
+        sphere.position.x = -2.5;
+
+        camera.position.z = -7;
+        camera.lookAt(0, 0, 0);
+
+        TweenMax.to(cube.position, 1, { y: 2.5, yoyo: true, repeat: -1, ease: Elastic.easeOut });
+        TweenMax.to(sphere.position, 3, { x: 2.5, yoyo: true, repeat: -1, ease: Power3.easeOut });
+        TweenMax.to(sphere.rotation, 3, { z: Math.PI * 4, yoyo: true, repeat: -1, ease: Elastic.easeOut });
+
+        function draw() {
+            //cube.rotation.x += 0.01;
+            //cube.rotation.y += 0.01;
+
+            // sphere.rotation.x += 0.01;
+            //sphere.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+
+            requestAnimationFrame(draw);
+        };
+
+        requestAnimationFrame(draw);
+    </script>
+</body>
+
+</html>

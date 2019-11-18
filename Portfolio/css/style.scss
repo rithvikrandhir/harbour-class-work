@@ -274,6 +274,12 @@ body{
     .highlight-word-1, .highlight-word-2{
         font-weight: bold;
     }
+    .highlight-word-1{
+        color: red;
+    }
+    .highlight-word-2{
+        color: blue;
+    }
 }
 @keyframes wheel-up-down {
       0% {

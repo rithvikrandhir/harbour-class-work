@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <style>
+        .wrapper>div {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1300px;
+            margin: 20px auto;
+        }
+
+        video {
+            width: 640px;
+            height: 480px;
+            border: 2px solid pink;
+        }
+
+        .canvas {
+            border: 2px solid hotpink;
+            background-image: url(https://i.pinimg.com/originals/39/37/85/39378510afacbd864196845c3638fdde.jpg);
+            background-size: cover;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div>
+            <video id="video" controls autoplay></video>
+            <canvas id="canvas1" class="canvas" width="640" height="480"></canvas>
+        </div>
+        <div>
+            <span>Video</span>
+            <span>Canvas</span>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas1");
+        const context = canvas.getContext("2d");
+        let width = 0;
+        let height = 0;
+
+        // Get video
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                // Put video input into video tag
+                video.srcObject = stream;
+
+                video.addEventListener("loadeddata", function () {
+                    width = video.videoWidth;
+                    height = video.videoHeight;
+                    console.log(width, height);
+
+                }, false);
+            })
+            .catch(function (error) {
+                console.log("Error:", error);
+            });
+
+        function draw() {
+            if (width !== 0 && height !== 0) {
+                context.drawImage(video, 0, 0, width, height);
+                findColor();
+            }
+
+            window.requestAnimationFrame(draw);
+        };
+
+        function findColor() {
+            let frame = context.getImageData(0, 0, width, height);
+
+            let l = frame.data.length / 4;
+
+
+            for (let i = 0; i < l; i++) {
+
+                let r = frame.data[i * 4 + 0];
+                let g = frame.data[i * 4 + 1];
+                let b = frame.data[i * 4 + 2];
+
+                if (g > r && g > b) {
+                    // If it's too dark it's probably not right
+                    if (g > 100) {
+                        // Alpha value to 0
+                        frame.data[i * 4 + 3] = 0;
+                    }
+                }
+            }
+
+
+            // Put the modified data back into the canvas
+            context.putImageData(frame, 0, 0);
+            return;
+        }
+
+        window.requestAnimationFrame(draw);
+    </script>
+
+</body>
+
+</html>

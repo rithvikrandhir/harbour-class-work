@@ -1,0 +1,69 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  width: 100vh;
+  height: 200vh;
+  position: relative;
+}
+
+.container .section {
+  background: #8543bd;
+  height: 50%;
+  width: 100vw;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .section .image-container {
+  display: -ms-grid;
+  display: grid;
+}
+
+.container .section .image-container .my-img {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  height: 80vh;
+}
+
+.container .section .change-button {
+  position: absolute;
+  bottom: 10%;
+  right: 50%;
+  -webkit-transform: translate(50%, 0);
+          transform: translate(50%, 0);
+  width: 400px;
+  height: 60px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 7px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 7px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 60px;
+  color: white;
+  border: 1px solid white;
+}
+
+.container .section .hobby-description {
+  color: white;
+  -ms-grid-column-align: start;
+      justify-self: start;
+  padding-right: 50px;
+}
+/*# sourceMappingURL=style.css.map */

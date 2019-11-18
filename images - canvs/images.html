@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <style>
+        canvas,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        img {
+            visibility: hidden;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./image.jpg">
+    <canvas></canvas>
+    <script>
+        const canvas = document.querySelector("canvas");
+        const context = canvas.getContext("2d");
+        const img = document.querySelector("img");
+        const pxSize = 16;
+        let pixels = [];
+        let built = false; // checks if the pixel data has been loaded 
+        const strength = 5000;
+        window.addEventListener('mousemove', (e) => {
+            mousePosition.x = e.x;
+            mousePosition.y = e.y;
+        })
+
+
+        const mousePosition  = {
+            x : 0,
+            y: 0
+        }
+
+        function buildPixelData(){
+            
+           // context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, 0, 0);
+            pixels = getPixels();
+            if(pixels.length > 0){
+                built = true;
+            }
+        }
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function draw() {
+            resize();
+            if(!built){
+                buildPixelData();
+            }
+            // context.clearRect(0, 0, canvas.width, canvas.height);
+            for(let i = 0; i<pixels.length; i++){
+                const currentPixel = pixels[i];
+                const deltaX = currentPixel.x - mousePosition.x;
+                const deltaY = currentPixel.y - mousePosition.y;
+                let angle = Math.atan2(deltaX, deltaY);
+                let distance = strength/Math.hypot(deltaX, deltaY);
+                context.fillStyle = pixels[i].rgb;
+                currentPixel.x += Math.sin(angle) * distance;
+                currentPixel.y += Math.cos(angle) * distance;
+                currentPixel.x += (currentPixel.ox - currentPixel.x)*0.5;
+                currentPixel.y += (currentPixel.oy - currentPixel.y)*0.5;
+
+                context.beginPath();
+                context.arc(currentPixel.x, currentPixel.y, 5, 0, Math.PI * 2);
+                context.fill();
+            }
+            window.requestAnimationFrame(draw);
+        }
+
+        function getPixels() {
+            const data = context.getImageData(0, 0, img.width, img.height);
+            const pxs = [];
+            for (let x = 0; x < data.width; x += pxSize) {
+                for (let y = 0; y < data.height; y += pxSize) {
+                    let index = (x * 4 + y * 4 * img.width);
+                    let alpha = data.data[index + 3];
+                    if (alpha > 0) {
+                        pxs.push({
+                            x: x,
+                            y: y,
+                            ox: x,
+                            oy: y,
+                            rgb: "rgb(" + data.data[index] + "," + data.data[index + 1] + "," + data.data[index + 2] + ")",
+                        });
+                    }
+                }
+            }
+            return pxs;
+        }
+
+        window.requestAnimationFrame(draw);
+    </script>
+</body>
+
+</html>

@@ -304,6 +304,14 @@ body {
   font-weight: bold;
 }
 
+.about-section .highlight-word-1 {
+  color: red;
+}
+
+.about-section .highlight-word-2 {
+  color: blue;
+}
+
 @-webkit-keyframes wheel-up-down {
   0% {
     margin-top: 2px;
